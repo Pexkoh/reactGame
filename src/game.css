@@ -1,0 +1,56 @@
+body {
+    outline: none;
+    background-color: black;
+}
+
+div {
+    outline: none;
+    color: white;
+
+    background-color: #100f0f;
+}
+
+div.Game {
+    font-family: 'Cascadia Code', 'Courier New', 'Lucida Console', monospace;
+    
+    outline: none;
+
+    position: fixed;
+    bottom: 5%;
+    left: 15%;
+}
+
+.Left {
+    width: 38.7%;
+
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    outline: none;
+
+    position: fixed;
+    bottom: 7.5%;
+    left: 10%;
+}
+
+.Right {
+    width: 38.7%;
+
+    outline: none;
+    margin: 0%;
+    
+    position: fixed;
+    bottom: 7.5%;
+    left: 50%;
+}
+
+div.pageLine {
+    display: block;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    outline: none;
+
+    white-space: pre-wrap;
+}
