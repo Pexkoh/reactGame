@@ -19,8 +19,11 @@ function TemplatePage( {setCurrentPage} ) {
     function handleKeyDown(e) {
         // spot to handle any page input
 
-        switch(e.target) {
+        switch(e.key) {
             case "ArrowUp":
+                break;
+
+            default:
                 break;
         }
     }

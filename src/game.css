@@ -3,10 +3,11 @@ body {
     background-color: black;
 }
 
+
 div {
     outline: none;
     color: white;
-
+    
     background-color: #100f0f;
 }
 
@@ -20,8 +21,8 @@ div.Game {
     left: 15%;
 }
 
-.Left {
-    width: 38.7%;
+.BottomLeft {
+    width: 234.375px;
 
     padding: 0px;
     margin: 0px;
@@ -29,19 +30,43 @@ div.Game {
     outline: none;
 
     position: fixed;
-    bottom: 7.5%;
-    left: 10%;
+    bottom: 46.875px;
+    left: 46.875px;
 }
 
-.Right {
-    width: 38.7%;
+.TopRight {
+    width: 468.75px;
+    height: 281.25px;
 
     outline: none;
     margin: 0%;
     
     position: fixed;
-    bottom: 7.5%;
-    left: 50%;
+    top: 46.875px;
+    right: 46.875px;
+}
+.BottomRight {
+    width: 234.375px;
+
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    outline: none;
+
+    position: fixed;
+    bottom: 46.875px;
+    right: 46.875px;
+}
+
+.Middle {
+    width: 468.75px;
+
+    outline: none;
+    margin: 0%;
+    
+    position: fixed;
+    bottom: 46.875px;
+    left: 346.875px;
 }
 
 div.pageLine {

@@ -28,8 +28,8 @@ function BaseElement( {pageContent, handleKeyDown, isFocused, cssClass} ) {
         <div 
             className={cssClass}
             style={pageStyles}
-            onKeyDown={handleKeyDown} 
-            tabIndex={-1} 
+            onKeyDown={isFocused ? handleKeyDown : () => {}}  // only focused elements can handle key input
+            tabIndex={isFocused ? -1 : 0}  // only focused elements depatch OnKeyDown events
             ref={pageRef}
         >{   
             pageArray.map((lineArray) => {

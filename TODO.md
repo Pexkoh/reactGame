@@ -22,3 +22,7 @@
 https://www.pixilart.com/gallery/tags/planet
 
 
+
+base size: width - 9.375px
+
+
