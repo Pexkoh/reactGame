@@ -103,6 +103,14 @@ export class Shield extends ShipModule {
         this.curShieldPoints -= usedSP;  // reduce shield by blocked amount
         return unblockedDamage;
     }
+    static createShield_MKI() {
+        return new Shield(
+            "Shield Mark I",
+            100,
+            25,
+            1
+        );
+    }
 }
 
 
@@ -163,12 +171,29 @@ export class WeaponSystem extends ShipModule {
 
         return [usedEnergy, totalDamage];
     }
+    static createWeaponSystem_MKI() {
+        return new WeaponSystem(
+            "WeaponSystem Mark I",
+            100,
+            "Laser",
+            1,
+            2,
+            5,
+            10
+        );
+    }
 }
 
 
 export class Hull extends ShipModule {
     constructor(name, maxIntegrity) {
         super(name, maxIntegrity);
+    }
+    static createHull_MKI() {
+        return new Hull(
+            "Hull Mark I",
+            100
+        );
     }
 
 }
@@ -196,6 +221,13 @@ export class EnergyGenerator extends ShipModule {
     }
     setLevel(newLevel) {
         this._level = newLevel;
+    }
+    static createEnergyGenerator_MKI() {
+        return new EnergyGenerator(
+            "Energy Generator Mark I",
+            100,
+            1
+        )
     }
 }
 

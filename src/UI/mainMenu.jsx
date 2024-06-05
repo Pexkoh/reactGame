@@ -3,9 +3,10 @@ import Page from "./page"
 import { mainMenu } from "../assets/pages";
 import { pageToArray } from "../assets/pages";
 import { generateLineStyle, generateCharStyles } from "../assets/styles";
+import { createInitGameState } from "../game/gameState";
 
 
-function MainMenu( {setCurrentPage} ) {
+function MainMenu( {setCurrentPage, gameState} ) {
     // STATIC DEFINITIONS OF THE INITIAL STATE VARIABLES
     const initPageState = {
         "menuPosition": "startGame",
@@ -41,7 +42,16 @@ function MainMenu( {setCurrentPage} ) {
 
             case "Enter": 
             case " ":
+                // START THE GAME
                 if (pageState.menuPosition == "startGame") {
+                    // initialize a new game state ref
+                    // TODO: warning if overwriting an old game state here
+
+                    gameState.current = createInitGameState(
+                        "Player Name",
+                        "THE INTERCEPTOR",
+                        1000
+                    );
                     setCurrentPage("testPage");
                 }
                 else if (pageState.menuPosition == "endGame") {

@@ -1,4 +1,4 @@
-import {Shield, Hull, EnergyGenerator, WeaponSystem } from "./shipModules.js";
+import { Shield } from "./shipModules.js";
 
 
 class SpaceShip {
@@ -6,37 +6,28 @@ class SpaceShip {
     _modules;
     _configuration;  // handles the energy distribution etc.
 
-    constructor(name) {
+    constructor(
+        name, 
+        shield, 
+        weaponSystem, 
+        energyGenerator, 
+        hull, 
+        hyperDrive, 
+        additional1, 
+        additional2
+    ) {
         this.name = name;
         this.configuration = {};
 
         this._modules = {
-            shield: new Shield(
-                "Shield Mark I",
-                40,
-                1
-            ),
-            weaponSystem: new WeaponSystem(
-                "Laser Mark I",
-                15,
-                "Laser",
-                1,
-                0,
-                10
-            ),
-            energyGenerator: new EnergyGenerator(
-                "Energy Generator Mark I",
-                20,
-                1
-            ),
-            hull: new Hull(
-                "Hull Mark I",
-                100
-            ),
-            hyperDrive: {}, 
+            shield: shield,
+            weaponSystem: weaponSystem,
+            energyGenerator: energyGenerator,
+            hull: hull,
+            hyperDrive: hyperDrive, 
             
-            additional1: {},
-            additional2: {},
+            additional1: additional1,
+            additional2: additional2,
         };
     }
 
@@ -112,6 +103,7 @@ class SpaceShip {
         }
     }
 }
+export default SpaceShip;
 
 
 function createConfiguration() {

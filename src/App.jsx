@@ -1,12 +1,11 @@
-import Page from './UI/page'
-import { mainMenuStyle } from "./assets/styles";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import MainMenu from './UI/mainMenu';
 import TestPage from './UI/testPage';
 import Fight from './UI/fight';
 
 function Game() {
     const [currentPage, setCurrentPage] = useState("mainMenu");
+    const gameState = useRef(null);  // 
 
     let pageElement;
     switch (currentPage) {
@@ -14,7 +13,7 @@ function Game() {
         trivial routing implementation
         */
         case "mainMenu":
-            pageElement = <MainMenu setCurrentPage={setCurrentPage} />;
+            pageElement = <MainMenu setCurrentPage={setCurrentPage} gameState={gameState} />;
             break;
             
         case "testPage":
@@ -33,36 +32,13 @@ function Game() {
         */
 
         e.stopPropagation();
-
-        /*
-        OLD -> TO REMOVE
-
-        let key = e.key;
-        console.log(key);
-    
-        if (key == 'ArrowLeft') {
-            setPage(pageToArray(myPage2));
-        } else if (key == 'ArrowRight') {
-            setPage(pageToArray(myPage));
-        } else if (key == 'ArrowDown') {
-            setPage(pageToArray(myPage3));
-        }
-        */
-    
     }
 
     return (
-        /*
-        <div className='Game' onKeyDown={handleKey} tabIndex={-1} >
-            <Page pageArray={page} pageStyleInit={mainMenuStyle} />
-        </div>
-        */
-        
+
         <div className='Game' onKeyDown={handleKey} tabIndex={-1} >
             {pageElement}
         </div>
-        
-
     )
 
 }

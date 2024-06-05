@@ -4,56 +4,19 @@ import { pageToArray } from "../assets/pages";
 import { playerShip, enemyShip, shipBar, fightInput } from "../assets/pages";
 
 
-function Fight( {setCurrentPage} ) {
+function Fight( {setCurrentPage, gameState, enemyShip} ) {
     
+
     return (
         <div>
-            <PlayerShip setCurrentPage={setCurrentPage} cssClass={"TopLeft"} />
-            <PlayerBar setCurrentPage={setCurrentPage} cssClass={"BottomLeft"} />
+            <PlayerShip />
+            <PlayerBar />
             
-            <EnemyShip setCurrentPage={setCurrentPage} cssClass={"TopRight"} />
-            <EnemyBar setCurrentPage={setCurrentPage} cssClass={"BottomRight"} />
+            <EnemyShip />
+            <EnemyBar />
             
-            <FightInput setCurrentPage={setCurrentPage} cssClass={"Middle"} />
+            <FightInput setCurrentPage={setCurrentPage} />
         </div>
-    )
-}
-
-
-function EnemyBar( {setCurrentPage, cssClass} ) {
-    const initPageState = {};
-    const initPageContent = {
-        "pageArray": pageToArray(shipBar),
-        "pageStyles": {},
-        "lineStyles": {},
-        "charStyles": {},
-    };
-
-    const [pageState, setPageState] = useState(initPageState);        
-    const [pageContent, setPageContent] = useState(initPageContent);  
-    
-
-    function handleKeyDown(e) {
-        switch(e.target) {
-            default:
-                setCurrentPage("mainMenu")
-                break;
-        }
-    }
-    function state2Sytles() {
-        // CALCULATE THE PAGE CSS BASED ON THE PAGE-STATE
-
-        return {};
-    }
-    
-
-    return (
-        <BaseElement 
-            pageContent={pageContent} 
-            handleKeyDown={handleKeyDown} 
-            isFocused={false}
-            cssClass={cssClass}
-        />
     )
 }
 
@@ -65,7 +28,7 @@ function PlayerShip() {
         "pageStyles": {
             width: "468.75px",
             height: "281.25px",
-
+            
             position: "fixed",
             top: "46.875px",
             left: "46.875px",
@@ -73,15 +36,15 @@ function PlayerShip() {
         "lineStyles": {},
         "charStyles": {},
     };
-
+    
     const [pageState, setPageState] = useState(initPageState);        
     const [pageContent, setPageContent] = useState(initPageContent);  
     
     return (
         <BaseElement 
-            pageContent={pageContent} 
-            isFocused={false}
-            cssClass={"FightPlayerShip"}
+        pageContent={pageContent} 
+        isFocused={false}
+        cssClass={"FightPlayerShip"}
         />
     )
 }
@@ -94,9 +57,65 @@ function EnemyShip() {
         "pageStyles": {
             width: "468.75px",
             height: "281.25px",
-
+            
             position: "fixed",
             top: "46.875px",
+            right: "46.875px",
+        },
+        "lineStyles": {},
+        "charStyles": {},
+    };
+    
+    const [pageState, setPageState] = useState(initPageState);        
+    const [pageContent, setPageContent] = useState(initPageContent);  
+    
+    return (
+        <BaseElement 
+        pageContent={pageContent} 
+        isFocused={false}
+        cssClass={"FightEnemyShip"}
+        />
+    )
+}
+
+
+function PlayerBar() {
+    const initPageState = {};
+    const initPageContent = {
+        "pageArray": pageToArray(shipBar),
+        "pageStyles": {
+            width: "234.375px",
+            
+            position: "fixed",
+            bottom: "46.875px",
+            left: "46.875px",
+        },
+        "lineStyles": {},
+        "charStyles": {},
+    };
+    
+    const [pageState, setPageState] = useState(initPageState);        
+    const [pageContent, setPageContent] = useState(initPageContent);  
+    
+    return (
+        <BaseElement 
+        pageContent={pageContent} 
+        isFocused={false}
+        cssClass={"FightPlayerBar"}
+        />
+    )
+}
+
+
+function EnemyBar() {
+    const initPageState = {};
+    const initPageContent = {
+        "pageArray": pageToArray(shipBar),
+        "pageStyles": {
+            width: "234.375px",
+
+            position: "fixed",
+            bottom: "46.875px",
             right: "46.875px",
         },
         "lineStyles": {},
@@ -105,62 +124,28 @@ function EnemyShip() {
 
     const [pageState, setPageState] = useState(initPageState);        
     const [pageContent, setPageContent] = useState(initPageContent);  
-    
+
     return (
         <BaseElement 
-            pageContent={pageContent} 
+            pageContent={pageContent}  
             isFocused={false}
-            cssClass={"FightEnemyShip"}
+            cssClass={"FightEnemyBar"}
         />
     )
 }
 
 
-function PlayerBar( {setCurrentPage, cssClass} ) {
-    const initPageState = {};
-    const initPageContent = {
-        "pageArray": pageToArray(shipBar),
-        "pageStyles": {},
-        "lineStyles": {},
-        "charStyles": {},
-    };
-
-    const [pageState, setPageState] = useState(initPageState);        
-    const [pageContent, setPageContent] = useState(initPageContent);  
-    
-
-    function handleKeyDown(e) {
-        switch(e.target) {
-            default:
-                setCurrentPage("mainMenu")
-                break;
-        }
-    }
-    function state2Sytles() {
-        // CALCULATE THE PAGE CSS BASED ON THE PAGE-STATE
-
-        return {};
-    }
-    
-
-    return (
-        <BaseElement 
-            pageContent={pageContent} 
-            handleKeyDown={handleKeyDown} 
-            isFocused={false}
-            cssClass={cssClass}
-        />
-    )
-}
-
-
-
-
-function FightInput( {setCurrentPage, cssClass} ) {
+function FightInput( {setCurrentPage} ) {
     const initPageState = {};
     const initPageContent = {
         "pageArray": pageToArray(fightInput),
-        "pageStyles": {},
+        "pageStyles": {
+            width: "468.75px",
+
+            position: "fixed",
+            bottom: "46.875px",
+            left: "346.875px",
+        },
         "lineStyles": {},
         "charStyles": {},
     };
@@ -173,7 +158,7 @@ function FightInput( {setCurrentPage, cssClass} ) {
         console.log(e.key);
 
         switch(e.key) {
-            case "BackSpace":
+            case "Backspace":
                 setCurrentPage("mainMenu")
                 break;
         }
@@ -183,14 +168,14 @@ function FightInput( {setCurrentPage, cssClass} ) {
 
         return {};
     }
-    
+
 
     return (
         <BaseElement 
             pageContent={pageContent} 
             handleKeyDown={handleKeyDown} 
             isFocused={true}
-            cssClass={cssClass}
+            cssClass={"FightInput"}
         />
     )
 }

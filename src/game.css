@@ -21,43 +21,6 @@ div.Game {
     left: 15%;
 }
 
-.BottomLeft {
-    width: 234.375px;
-
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-    outline: none;
-
-    position: fixed;
-    bottom: 46.875px;
-    left: 46.875px;
-}
-
-.TopRight {
-    width: 468.75px;
-    height: 281.25px;
-
-    outline: none;
-    margin: 0%;
-    
-    position: fixed;
-    top: 46.875px;
-    right: 46.875px;
-}
-.BottomRight {
-    width: 234.375px;
-
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-    outline: none;
-
-    position: fixed;
-    bottom: 46.875px;
-    right: 46.875px;
-}
-
 .Middle {
     width: 468.75px;
 
