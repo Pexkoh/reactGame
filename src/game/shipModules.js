@@ -1,85 +1,53 @@
 export class ShipModule {
-    _maxIntegrity;
-    _curIntegrity;
     _name;
 
-    constructor(name, maxIntegrity) {
+    constructor(name) {
         this.name = name;
-        this.maxIntegrity = maxIntegrity;
-        this.curIntegrity = maxIntegrity;  // POSSIBLY CHANGE LATER
     }
     
     // GETTER & SETTER
-    getMaxIntegrity() {
-        return this._maxIntegrity
-    }
-    setMaxIntegrity(newMaxIntegrity) {
-        this._maxIntegrity = newMaxIntegrity;
-    }
-    getCurIntegrity() {
-        return this._curIntegrity
-    }
-    setCurIntegrity(newCurIntegrity) {
-        this._curIntegrity = newCurIntegrity;
-    }
-    setName(newName) {
+    set name(newName) {
         this._name = newName;
     }
-    getName() {
+    get name() {
         return this._name;
-    }
-
-    isDestroyed() {
-        // returns true if the module integrity > 0
-        if (this._curIntegrity > 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }
 
 export class Shield extends ShipModule {
-    _level;
     _maxShieldPoints;
     _curShieldPoints;
-    _conversionRate;  // Rate for energy to shield point conversion
+    _chargeRate;  // Rate for energy to shield point conversion
 
-    constructor(name, maxIntegrity, maxShieldPoints, level) {
-        super(name, maxIntegrity);
+    constructor(name, maxShieldPoints, chargeRate) {
+        super(name);
         
-        this.level = level;
         this.maxShieldPoints = maxShieldPoints;
         this.curShieldPoints = maxShieldPoints;
+        this.chargeRate = chargeRate;
     }
 
     // GETTER & SETTER
-    getMaxShieldPoints() {
+    get maxShieldPoints() {
         return this._maxShieldPoints;
     }
-    setMaxShieldPoints(newMaxShieldPoints) {
+    set maxShieldPoints(newMaxShieldPoints) {
         this._maxShieldPoints = newMaxShieldPoints;
     }
-    getLevel() {
-        return this._level;
-    }
-    setLevel(newLevel) {
-        this._level = newLevel;
-    }
-    getCurShieldPoints() {
+    get curShieldPoints() {
         return this._curShieldPoints;
     }
-    setCurShieldPoints(newCurShieldPoints) {
+    set curShieldPoints(newCurShieldPoints) {
         this._curShieldPoints = newCurShieldPoints;
     }
-    getConversionRate() {
-        return this._conversionRate;
+    get chargeRate() {
+        return this._chargeRate;
     }
-    setConversionRate(newConversionRate) {
-        this._conversionRate = newConversionRate;
+    set chargeRate(newChargeRate) {
+        this._chargeRate = newChargeRate;
     }
 
-    generateShield(energy) {
+    chargeShield() {
         // Calculate the max amount of shield generated with the given amount of energy
         
         // SP = ShieldPoints
@@ -108,59 +76,26 @@ export class Shield extends ShipModule {
             "Shield Mark I",
             100,
             25,
-            1
         );
     }
 }
 
 
 export class WeaponSystem extends ShipModule {
-    _level;
-    _type;
-    _energyCost;
-    _maxEnergy;  // per attack
-    _damage;     // per shot|bullet
+    _damage;     // per shot
 
-    constructor(name, maxIntegrity, type, level, energyCost, damage, maxEnergy) {
-        super(name, maxIntegrity);
+    constructor(name, damage) {
+        super(name);
         
-        this.type   = type;
-        this.level  = level;
         this.damage = damage;
-        this.energyCost = energyCost;
-        this.maxEnergy = maxEnergy;
     }
 
     // GETTER & SETTER
-    getType() {
-        return this._type;
-    }
-    setType(newType) {
-        this._type = newType;
-    }
-    getLevel() {
-        return this._level;
-    }
-    setLevel(newLevel) {
-        this._level = newLevel;
-    }
-    getEnergyCost() {
-        return this._energyCost;
-    }
-    setEnergyCost(newEnergyCost) {
-        this._energyCost = newEnergyCost;
-    }
-    getDamage() {
+    get damage() {
         return this._damage;
     }
-    setDamage(newDamage) {
+    set damage(newDamage) {
         this._damage = newDamage;
-    }
-    getMaxEnergy() {
-        return this._maxEnergy;
-    }
-    setMaxEnergy(newMaxEnergy) {
-        this._maxEnergy = newMaxEnergy;
     }
 
     fireWeaponSystem(energy) {
@@ -174,11 +109,6 @@ export class WeaponSystem extends ShipModule {
     static createWeaponSystem_MKI() {
         return new WeaponSystem(
             "WeaponSystem Mark I",
-            100,
-            "Laser",
-            1,
-            2,
-            5,
             10
         );
     }
@@ -186,48 +116,38 @@ export class WeaponSystem extends ShipModule {
 
 
 export class Hull extends ShipModule {
+    _curIntegrity;
+    _maxIntegrity;
+
     constructor(name, maxIntegrity) {
-        super(name, maxIntegrity);
+        super(name);
+
+        this.maxIntegrity = maxIntegrity;
+        this.curIntegrity = maxIntegrity;
+    }
+
+    // GETTER & SETTER
+    get curIntegrity() {
+        return this._curIntegrity;
+    }
+    set curIntegrity(newCurIntegrity) {
+        this._curIntegrity = newCurIntegrity;
+    }
+    get maxIntegrity() {
+        return this._maxIntegrity;
+    }
+    set maxIntegrity(newMaxIntegrity) {
+        this._maxIntegrity = newMaxIntegrity;
+    }
+
+    isDestroyed() {
+        return this.curIntegrity <= 0;
     }
     static createHull_MKI() {
         return new Hull(
             "Hull Mark I",
             100
         );
-    }
-
-}
-
-
-export class EnergyGenerator extends ShipModule {
-    _level;
-    _energyRate;
-    _fuelCost;
-
-    constructor(name, maxIntegrity, level) {
-        super(name, maxIntegrity);
-        this.level = level;
-    }
-
-    // GETTER & SETTER
-    getType() {
-        return this._type;
-    }
-    setType(newType) {
-        this._type = newType;
-    }
-    getLevel() {
-        return this._level;
-    }
-    setLevel(newLevel) {
-        this._level = newLevel;
-    }
-    static createEnergyGenerator_MKI() {
-        return new EnergyGenerator(
-            "Energy Generator Mark I",
-            100,
-            1
-        )
     }
 }
 
@@ -236,23 +156,24 @@ export class FuelTank extends ShipModule {
     _maxCapacity;
     _curFuel;
 
-    constructor(name, maxIntegrity, maxCapacity, curFuel) {
-        super(name, maxIntegrity);
+    constructor(name, maxCapacity) {
+        super(name);
         
         this.maxCapacity = maxCapacity;
-        this._curFuel = curFuel;
+        this.curFuel = maxCapacity;
     }
 
-    getMaxCapacity() {
+    // GETTER & SETTER
+    get maxCapacity() {
         return this._maxCapacity;
     }
-    setMaxCapacity(newMaxCapacity) {
+    set maxCapacity(newMaxCapacity) {
         this._maxCapacity = newMaxCapacity;
     }
-    getCurFuel() {
+    get curFuel() {
         return this._curFuel;
     }
-    setCurFuel(newCurFuel) {
+    set curFuel(newCurFuel) {
         this._curFuel = newCurFuel;
     }
 
@@ -271,32 +192,54 @@ export class FuelTank extends ShipModule {
 
         return drainedAmount;
     }
+    isEmpty() {
+        return this.curFuel === 0;  // assumes no negative fuel levels!
+    }
+    static createFuelTank_MKI() {
+        return new FuelTank(
+            "Fuel Tank Mark I",
+            10
+        );
+    }
 }
 
 
-export class HyperDrive extends ShipModule {
+export class Hyperdrive extends ShipModule {
     _chargeTime;
     _chargeProgress;
     
-    constructor(name, maxIntegrity, chargeTime) {
-        super(name, maxIntegrity);
+    constructor(name, chargeTime) {
+        super(name);
 
         this.chargeTime = chargeTime;
         this.chargeProgress = 0;
     }
 
-    getChargeTime() {
+    // GETTER & SETTER
+    get chargeTime() {
         return this._chargeTime;
     }
-    setChargeTime(newChargeTime) {
+    set chargeTime(newChargeTime) {
         this._chargeTime = newChargeTime;
     }
-    getChargeProgress() {
+    get chargeProgress() {
         return this._chargeProgress;
     }
-    setChargeProgress(newChargeProgress) {
+    set chargeProgress(newChargeProgress) {
         this._chargeProgress = newChargeProgress;
     }
     
+    resetChargeProgress() {
+        this.chargeProgress = 0;
+    }
+    isReady() {
+        return this.chargeProgress >= this.chargeTime;
+    }
+    static createHyperdrive_MKI() {
+        return new Hyperdrive(
+            "Hyperdrive Mark I",
+            1,
+        );
+    }
 }
 

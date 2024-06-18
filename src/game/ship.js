@@ -1,33 +1,28 @@
-import { Shield, EnergyGenerator, Hull, WeaponSystem, FuelTank } from "./shipModules.js";
+import { Shield, Hull, WeaponSystem, FuelTank, Hyperdrive } from "./shipModules.js";
 
 
 class SpaceShip {
     _name;
     _modules;
-    _configuration;  // handles the energy distribution etc.
 
     constructor(
         name, 
-        shield, 
-        weaponSystem, 
-        energyGenerator, 
         hull, 
-        hyperDrive,
+        shield, 
         fuelTank,
+        hyperdrive,
+        weaponSystem, 
         additional1, 
         additional2
     ) {
         this.name = name;
-        this.configuration = {};
-
         this._modules = {
             // simple asignment
             hull           : hull,
             shield         : shield,
             fuelTank       : fuelTank,
-            hyperDrive     : hyperDrive,
+            hyperdrive     : hyperdrive,
             weaponSystem   : weaponSystem,
-            energyGenerator: energyGenerator,
             
             additional1: additional1,
             additional2: additional2,
@@ -35,63 +30,69 @@ class SpaceShip {
     }
 
     // GETTER & SETTER
-    getName() {
+    get name() {
         return this._name;
     }
-    setName(name) {
-        this.name = name;
+    set name(newName) {
+        this._name = newName;
     }
-    getFuel() {
-        return this.modules["fuelTank"].getFuel();
-    }
-    setFuel(newFuel) {
-        this.modules["fuelTank"].fuel = newFuel;  // using fuelTank internal setter
-    }
-    getConfiguration() {
-        return this._configuration;
-    }
-    // TODO: IMPLEMENT CHANGE CONFIGURATION METHOD
-    setConfiguraion(newConfiguration) {
-        this._configuration = newConfiguration;
-    }
-
-    getModules() {
+    get modules() {
         return this._modules;
     }
-    setModules(newModules) {
+    set modules(newModules) {
         return;
     }
-    getShield() {
+    get shield() {
         return this._modules["shield"];
     }
-    setShield(newShield) {
+    set shield(newShield) {
         this._modules.shield = newShield;
     }
-    getWeaponSystem() {
+    get weaponSystem() {
         return this._modules["weaponSystem"];
     }
-    setWeaponSystem(newWeaponSystem) {
+    set weaponSystem(newWeaponSystem) {
         this._modules.weaponSystem = newWeaponSystem;
     }
-    getPowerGenerator() {
-        return this._modules["powerGenerator"];
+    get hyperdrive() {
+        return this._modules["hyperdrive"];
     }
-    setPowerGenerator(newPowerGenerator) {
-        this._modules.powerGenerator = newPowerGenerator;
+    set hyperdrive(newHyperdrive) {
+        this._modules.hyperdrive = newHyperdrive;
     }
-    getAdditional1() {
+    get additional1() {
         return this._modules["additional1"];
     }
-    setAdditional1(newAdditional) {
+    set additional1(newAdditional) {
         this._modules.additional1 = newAdditional;
     }
-    getAdditional2() {
+    get additional2() {
         return this._modules["additional2"];
     }
-    setAdditional2(newAdditional) {
+    set additional2(newAdditional) {
         this._modules.additional2 = newAdditional;
     }
 
+    // GENERAL ACTIONS AND INTERACTION WITH SHIP MODULES
+    get fuel() {
+        return this.modules["fuelTank"].getFuel();
+    }
+    set fuel(newFuel) {
+        this.modules["fuelTank"].fuel = newFuel;  // using fuelTank internal setter
+    }
+    get status() {
+        /*
+        returns object describing the current ship status
+        */
+        return {
+            "maxShield": this.modules["shield"].maxShieldPoints,
+            "curShield": this.modules["shield"].curShieldPoints,
+            "maxFuel": this.modules["fuelTank"].maxCapacity,
+            "curFuel": this.modules["fuelTank"].curFuel,
+            "maxIntegrity": this.modules["hull"].maxIntegrity,
+            "curIntegrity": this.modules["hull"].curIntegrity,
+        };
+    }
     fireWeaponSystem(target) {
         // TODO: IMPLEMENTATION
     }
@@ -105,34 +106,39 @@ class SpaceShip {
             return false;
         }
     }
+
     static createBasePlayerShip(shipName) {
         return new SpaceShip(
             shipName,
-            Shield.createShield_MKI(),
-            WeaponSystem.createWeaponSystem_MKI(),
-            EnergyGenerator.createEnergyGenerator_MKI(),
             Hull.createHull_MKI(),
+            Shield.createShield_MKI(),
+            FuelTank.createFuelTank_MKI(),
+            Hyperdrive.createHyperdrive_MKI(),
+            WeaponSystem.createWeaponSystem_MKI(),
+            
             undefined,
             undefined,
-            undefined
+        );
+    }
+    static createBaseEnemyShip(shipName) {
+        return new SpaceShip(
+            shipName,
+            Hull.createHull_MKI(),
+            new Shield(
+                "Shield Mark 0",
+                0,
+                0,
+            ),
+            FuelTank.createFuelTank_MKI(),
+            Hyperdrive.createHyperdrive_MKI(),
+            new WeaponSystem(
+                "Weapon System Mark 0",
+                5,
+            ),
+            
+            undefined,
+            undefined,
         );
     }
 }
 export default SpaceShip;
-
-
-function createConfiguration() {
-    let configuration = {
-        shield: 0,
-        weaponSystem: 0,
-        hyperDrive: 0,
-    };
-
-    return configuration;
-}
-
-
-// main call
-let myShield = new Shield("shield I", 100, 70, 1);
-console.log(myShield);
-

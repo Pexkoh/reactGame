@@ -132,9 +132,9 @@ export let shipBar = (
 `#########################
 #                       #
 #                       #
-#   Shield:  xx/zz      #
-#   Fuel:    xx/zz      #
-#   Hull:    xx/zz      #
+#   Fuel:    curF/maxF    #
+#   Shield:  curS/maxS    #
+#   Hull:    curH/maxH    #
 #                       #
 #                       #
 #########################`
@@ -144,7 +144,7 @@ export let shipBar = (
 export let myElem = `#`;
 
 
-export let enemyShip = (
+export let enemyShipPage = (
 `##################################################
 #                > THE BUTCHER <                 #
 #                                                #

@@ -53,15 +53,12 @@ function MainMenu( {setCurrentPage, gameState} ) {
                         1000
                     );
                     setCurrentPage("testPage");
+                    console.log(gameState.current);
                 }
                 else if (pageState.menuPosition == "endGame") {
                     window.close();
                 }
 
-                break;
-
-            case "F4":
-                setCurrentPage("fight");
                 break;
 
             default:

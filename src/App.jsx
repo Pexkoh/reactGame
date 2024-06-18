@@ -21,7 +21,7 @@ function Game() {
             break;
 
         case "fight":
-            pageElement = <Fight setCurrentPage={setCurrentPage} />;
+            pageElement = <Fight setCurrentPage={setCurrentPage} gameState={gameState.current} />;
             break;
         }
             

@@ -1,21 +1,28 @@
 import { useState } from "react"
 import BaseElement from "./baseElement";
 import { pageToArray } from "../assets/pages";
-import { playerShip, enemyShip, shipBar, fightInput } from "../assets/pages";
+import { playerShip, enemyShipPage, shipBar, fightInput } from "../assets/pages";
 import { generateLineStyle, generateCharStyles } from "../assets/styles";
+import SpaceShip from "../game/ship";
+import { format3Digits } from "../utility";
 
 
-function Fight( {setCurrentPage, gameState, enemyShip} ) {
-    const [enemyState, setEnenmyState] = useState();
-    
+function Fight( {setCurrentPage, gameState} ) {
+    const enemyShipInit = SpaceShip.createBaseEnemyShip();
+    const [enemyShip, setEnemyShip] = useState(enemyShipInit);
+
+    console.log("Player Ship:", gameState.playerShip);
+    console.log(gameState.playerShip.status);
+    console.log("Enemy Ship:", enemyShip);
+    console.log(enemyShip.status);
 
     return (
         <div>
             <PlayerShip />
-            <PlayerBar />
+            <PlayerBar shipStatus={gameState.playerShip.status} />
             
             <EnemyShip />
-            <EnemyBar />
+            <EnemyBar shipStatus={enemyShip.status} />
             
             <FightInput setCurrentPage={setCurrentPage} />
         </div>
@@ -55,7 +62,7 @@ function PlayerShip() {
 function EnemyShip() {
     const initPageState = {};
     const initPageContent = {
-        "pageArray": pageToArray(enemyShip),
+        "pageArray": pageToArray(enemyShipPage),
         "pageStyles": {
             width: "468.75px",
             height: "281.25px",
@@ -81,10 +88,22 @@ function EnemyShip() {
 }
 
 
-function PlayerBar() {
+function PlayerBar({ shipStatus }) {
+    console.log("in player", shipBar);
+    // unpack ship status values
+    const {maxShield, curShield, maxFuel, curFuel, maxIntegrity, curIntegrity} = shipStatus;  
+    let PlayerShipBar = shipBar  // insert variables into the page
+        .replace("maxS", format3Digits(maxShield))
+        .replace("curS", format3Digits(curShield))
+        .replace("maxF", format3Digits(maxFuel))
+        .replace("curF", format3Digits(curFuel))
+        .replace("maxH", format3Digits(maxIntegrity))
+        .replace("curH", format3Digits(curIntegrity))
+
+    console.log("in player", PlayerShipBar);
     const initPageState = {};
     const initPageContent = {
-        "pageArray": pageToArray(shipBar),
+        "pageArray": pageToArray(PlayerShipBar),
         "pageStyles": {
             width: "234.375px",
             
@@ -109,10 +128,23 @@ function PlayerBar() {
 }
 
 
-function EnemyBar() {
+function EnemyBar( { shipStatus } ) {
+    console.log("in enemy", shipBar);
+    // unpack ship status values
+    const {maxShield, curShield, maxFuel, curFuel, maxIntegrity, curIntegrity} = shipStatus;  
+    
+    let EnemyShipBar = shipBar  // insert variables into the page
+        .replace("maxS", format3Digits(maxShield))
+        .replace("curS", format3Digits(curShield))
+        .replace("maxF", format3Digits(maxFuel))
+        .replace("curF", format3Digits(curFuel))
+        .replace("maxH", format3Digits(maxIntegrity))
+        .replace("curH", format3Digits(curIntegrity))
+
+    console.log("in enemy", EnemyShipBar);
     const initPageState = {};
     const initPageContent = {
-        "pageArray": pageToArray(shipBar),
+        "pageArray": pageToArray(EnemyShipBar),
         "pageStyles": {
             width: "234.375px",
 

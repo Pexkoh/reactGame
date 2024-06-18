@@ -25,6 +25,10 @@ function TestPage( {setCurrentPage} ) {
             case "Backspace":
                 setCurrentPage("mainMenu");
                 break;
+
+            case "Enter":
+                setCurrentPage("fight");
+                break;
         }
     }
     
