@@ -1,16 +1,17 @@
 import { useState } from "react"
-import Page from "./page"
+import Page from "../baseElements/page"
 import { pageToArray } from "../assets/pages";
-import { testPage } from "../assets/pages";
+import { ambush } from "../assets/pages";
+import { generateLineStyle, generateCharStyles } from "../assets/styles";
 
 
-function TestPage( {setCurrentPage} ) {
+function Ambush( {setCurrentPage} ) {
     const initPageState = {};
     const initPageContent = {
-        "pageArray": pageToArray(testPage),
+        "pageArray": pageToArray(ambush),
         "pageStyles": {},
-        "lineStyles": {},
-        "charStyles": {},
+        "lineStyles": generateLineStyle("25", {"color": "limegreen"}),
+        "charStyles": generateCharStyles("25_0,25_82", {"color": "white"}),
     };
 
     const [pageState, setPageState] = useState(initPageState);        
@@ -22,12 +23,9 @@ function TestPage( {setCurrentPage} ) {
         // spot to handle any page input
 
         switch(e.key) {
-            case "Backspace":
-                setCurrentPage("mainMenu");
-                break;
-
+            case " ":
             case "Enter":
-                setCurrentPage("fight");
+                setCurrentPage("secondFight");
                 break;
         }
     }
@@ -38,4 +36,4 @@ function TestPage( {setCurrentPage} ) {
     )
 }
 
-export default TestPage;
+export default Ambush;

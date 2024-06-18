@@ -1,13 +1,12 @@
 import { useState, useRef } from 'react';
-import MainMenu from './UI/mainMenu';
-import TestPage from './UI/testPage';
-import Fight from './UI/fight';
-import Introduction from './UI/introduction';
-import GameOver from './UI/gameOver';
-import ToBeContinued from './UI/toBeContinued';
-import Victory from './UI/victory';
-import SecondFight from './UI/secondFight';
-import Ambush from './UI/ambush';
+import MainMenu from './UI/menus/mainMenu';
+import FirstFight from './UI/fights/fight';
+import Introduction from './UI/events/introduction';
+import GameOver from './UI/menus/gameOver';
+import ToBeContinued from './UI/events/toBeContinued';
+import Victory from './UI/events/victory';
+import SecondFight from './UI/fights/secondFight';
+import Ambush from './UI/events/ambush';
 
 function Game() {
     const [currentPage, setCurrentPage] = useState("mainMenu");
@@ -30,10 +29,6 @@ function Game() {
             pageElement = <GameOver setCurrentPage={setCurrentPage} />;
             break;        
 
-        case "testPage":
-            pageElement = <TestPage setCurrentPage={setCurrentPage} />;
-            break;
-
         case "toBeContinued":
             pageElement = <ToBeContinued setCurrentPage={setCurrentPage} />;
             break;
@@ -46,8 +41,8 @@ function Game() {
             pageElement = <Ambush setCurrentPage={setCurrentPage} />;
             break;    
 
-        case "fight":
-            pageElement = <Fight setCurrentPage={setCurrentPage} gameState={gameState.current} />;
+        case "firstFight":
+            pageElement = <FirstFight setCurrentPage={setCurrentPage} gameState={gameState.current} />;
             break;    
 
         case "secondFight":

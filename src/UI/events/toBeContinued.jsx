@@ -1,17 +1,16 @@
 import { useState } from "react"
-import Page from "./page"
+import Page from "../baseElements/page"
 import { pageToArray } from "../assets/pages";
-import { ambush } from "../assets/pages";
-import { generateLineStyle, generateCharStyles } from "../assets/styles";
+import { toBeContinued } from "../assets/pages";
 
 
-function Ambush( {setCurrentPage} ) {
+function ToBeContinued( {setCurrentPage} ) {
     const initPageState = {};
     const initPageContent = {
-        "pageArray": pageToArray(ambush),
+        "pageArray": pageToArray(toBeContinued),
         "pageStyles": {},
-        "lineStyles": generateLineStyle("25", {"color": "limegreen"}),
-        "charStyles": generateCharStyles("25_0,25_82", {"color": "white"}),
+        "lineStyles": {},
+        "charStyles": {},
     };
 
     const [pageState, setPageState] = useState(initPageState);        
@@ -25,7 +24,7 @@ function Ambush( {setCurrentPage} ) {
         switch(e.key) {
             case " ":
             case "Enter":
-                setCurrentPage("secondFight");
+                setCurrentPage("mainMenu");
                 break;
         }
     }
@@ -36,4 +35,4 @@ function Ambush( {setCurrentPage} ) {
     )
 }
 
-export default Ambush;
+export default ToBeContinued;

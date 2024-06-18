@@ -1,9 +1,9 @@
 import { useState } from "react"
-import Page from "./page"
+import Page from "../baseElements/page"
 import { pageToArray } from "../assets/pages";
 import { victory } from "../assets/pages";
 import { generateLineStyle, generateCharStyles } from "../assets/styles";
-import { WeaponSystem } from "../game/shipModules";
+import { WeaponSystem } from "../../game/shipModules";
 
 
 function Victory( {setCurrentPage, gameState} ) {

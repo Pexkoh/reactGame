@@ -1,14 +1,14 @@
 import { useState, useRef } from "react"
-import BaseElement from "./baseElement";
+import BaseElement from "../baseElements/baseElement";
 import { pageToArray } from "../assets/pages";
 import { playerShip, enemyShipPage, shipBar, fightInput } from "../assets/pages";
 import { generateLineStyle, generateCharStyles } from "../assets/styles";
-import SpaceShip from "../game/ship";
-import { format3Digits } from "../utility";
+import SpaceShip from "../../game/ship";
+import { format3Digits } from "../../utility";
 
 
-function Fight( {setCurrentPage, gameState} ) {
-    const enemyShip = useRef(SpaceShip.createBaseEnemyShip());
+function SecondFight( {setCurrentPage, gameState} ) {
+    const enemyShip = useRef(SpaceShip.createBaseEnemyShip2());
     const [fightStatus, setFightStatus] = useState({
         "playerStatus": gameState.playerShip.status,
         "enemyStatus": enemyShip.current.status
@@ -211,6 +211,7 @@ function FightInput( {setCurrentPage, setFightStatus, playerShip, enemyShip} ) {
                 if (pageState.menuPosition === 1) {  // ATTACK
                     playerShip.fireWeaponSystem(enemyShip);  // Player Action
                     enemyShip.fireWeaponSystem(playerShip);  // Enemy Action
+                    enemyShip.chargeShield(playerShip);      // Enemy Action
                     setFightStatus({
                         "playerStatus": playerShip.status,
                         "enemyStatus": enemyShip.status
@@ -220,13 +221,14 @@ function FightInput( {setCurrentPage, setFightStatus, playerShip, enemyShip} ) {
                     if (playerShip.isDestroyed()) {  // GAME OVER
                         setCurrentPage("gameOver");
                     } else if (enemyShip.isDestroyed()) {  // VICTORY
-                        setCurrentPage("victory");
+                        setCurrentPage("toBeContinued");
                     }
 
                 }
                 else if (pageState.menuPosition === 2) {  // Charge Shield
                     playerShip.chargeShield();  // Player Action
-                    enemyShip.fireWeaponSystem(playerShip);  // Enemy Action
+                    enemyShip.chargeShield();   // Enemy Action
+                    enemyShip.chargeShield();   // Enemy Action
                     setFightStatus({
                         "playerStatus": playerShip.status,
                         "enemyStatus": enemyShip.status
@@ -235,7 +237,7 @@ function FightInput( {setCurrentPage, setFightStatus, playerShip, enemyShip} ) {
                     if (playerShip.isDestroyed()) {  // GAME OVER
                         setCurrentPage("gameOver");
                     } else if (enemyShip.isDestroyed()) {  // VICTORY
-                        setCurrentPage("victory");
+                        setCurrentPage("toBeContinued");
                     }
 
                 }
@@ -306,4 +308,4 @@ function FightInput( {setCurrentPage, setFightStatus, playerShip, enemyShip} ) {
 }
 
 
-export default Fight;
+export default SecondFight;

@@ -1,9 +1,9 @@
 import { useState } from "react"
-import Page from "./page"
+import Page from "../baseElements/page"
 import { mainMenu } from "../assets/pages";
 import { pageToArray } from "../assets/pages";
 import { generateLineStyle, generateCharStyles } from "../assets/styles";
-import { createInitGameState } from "../game/gameState";
+import { createInitGameState } from "../../game/gameState";
 
 
 function MainMenu( {setCurrentPage, gameState} ) {

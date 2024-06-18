@@ -1,13 +1,13 @@
 import { useState } from "react"
-import Page from "./page"
+import Page from "../baseElements/page"
 import { pageToArray } from "../assets/pages";
-import { toBeContinued } from "../assets/pages";
+import { gameOver } from "../assets/pages";
 
 
-function ToBeContinued( {setCurrentPage} ) {
+function GameOver( {setCurrentPage} ) {
     const initPageState = {};
     const initPageContent = {
-        "pageArray": pageToArray(toBeContinued),
+        "pageArray": pageToArray(gameOver),
         "pageStyles": {},
         "lineStyles": {},
         "charStyles": {},
@@ -35,4 +35,4 @@ function ToBeContinued( {setCurrentPage} ) {
     )
 }
 
-export default ToBeContinued;
+export default GameOver;

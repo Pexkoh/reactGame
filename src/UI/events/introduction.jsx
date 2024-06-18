@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Page from "./page"
+import Page from "../baseElements/page"
 import { pageToArray } from "../assets/pages";
 import { introduction } from "../assets/pages";
 import { generateLineStyle, generateCharStyles } from "../assets/styles";
@@ -25,7 +25,7 @@ function Introduction( {setCurrentPage} ) {
         switch(e.key) {
             case " ":
             case "Enter":
-                setCurrentPage("fight");
+                setCurrentPage("firstFight");
                 break;
         }
     }
