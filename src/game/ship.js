@@ -1,4 +1,4 @@
-import { Shield } from "./shipModules.js";
+import { Shield, EnergyGenerator, Hull, WeaponSystem, FuelTank } from "./shipModules.js";
 
 
 class SpaceShip {
@@ -12,7 +12,8 @@ class SpaceShip {
         weaponSystem, 
         energyGenerator, 
         hull, 
-        hyperDrive, 
+        hyperDrive,
+        fuelTank,
         additional1, 
         additional2
     ) {
@@ -20,11 +21,13 @@ class SpaceShip {
         this.configuration = {};
 
         this._modules = {
-            shield: shield,
-            weaponSystem: weaponSystem,
+            // simple asignment
+            hull           : hull,
+            shield         : shield,
+            fuelTank       : fuelTank,
+            hyperDrive     : hyperDrive,
+            weaponSystem   : weaponSystem,
             energyGenerator: energyGenerator,
-            hull: hull,
-            hyperDrive: hyperDrive, 
             
             additional1: additional1,
             additional2: additional2,
@@ -42,7 +45,7 @@ class SpaceShip {
         return this.modules["fuelTank"].getFuel();
     }
     setFuel(newFuel) {
-        this.modules["fuelTank"].fuel = newFuel;
+        this.modules["fuelTank"].fuel = newFuel;  // using fuelTank internal setter
     }
     getConfiguration() {
         return this._configuration;
@@ -101,6 +104,18 @@ class SpaceShip {
         } else {
             return false;
         }
+    }
+    static createBasePlayerShip(shipName) {
+        return new SpaceShip(
+            shipName,
+            Shield.createShield_MKI(),
+            WeaponSystem.createWeaponSystem_MKI(),
+            EnergyGenerator.createEnergyGenerator_MKI(),
+            Hull.createHull_MKI(),
+            undefined,
+            undefined,
+            undefined
+        );
     }
 }
 export default SpaceShip;

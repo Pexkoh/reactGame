@@ -131,10 +131,10 @@ export let playerShip = (
 export let shipBar = (
 `#########################
 #                       #
-#    Shield:  20/xxx    #
-#    Hull:    8/10      #
-#    Fuel:    20/x      #
 #                       #
+#   Shield:  xx/zz      #
+#   Fuel:    xx/zz      #
+#   Hull:    xx/zz      #
 #                       #
 #                       #
 #########################`
@@ -174,9 +174,9 @@ export let fightInput = (
 `##################################################
 #                                                #
 #                                                #
-#                   > Attack <                   #
-#                   > Charge <                   #
-#                                                #
+#              > Attack            <             #
+#              > Charge Shield     <             #
+#              > Charge Hyperdrive <             #
 #                                                #
 #                                                #
 ##################################################`
