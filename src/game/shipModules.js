@@ -49,17 +49,10 @@ export class Shield extends ShipModule {
 
     chargeShield() {
         // Calculate the max amount of shield generated with the given amount of energy
-        
-        // SP = ShieldPoints
-        let potentialSP = energy * this.conversionRate;
         let missingSP = this.maxShieldPoints - this.curShieldPoints;
 
-        let restoredSP = Math.min(potentialSP, missingSP);
-        let usedEnergy = restoredSP / this.conversionRate;
-
+        let restoredSP = Math.min(this.chargeRate, missingSP);
         this.curShieldPoints += restoredSP;
-
-        return usedEnergy;
     }
     blockDamage(damage) {
         // calculate the damage left over after using available shield points to reduce the damage
@@ -75,7 +68,7 @@ export class Shield extends ShipModule {
         return new Shield(
             "Shield Mark I",
             100,
-            25,
+            50,
         );
     }
 }
@@ -109,7 +102,7 @@ export class WeaponSystem extends ShipModule {
     static createWeaponSystem_MKI() {
         return new WeaponSystem(
             "WeaponSystem Mark I",
-            10
+            20
         );
     }
 }
@@ -140,6 +133,9 @@ export class Hull extends ShipModule {
         this._maxIntegrity = newMaxIntegrity;
     }
 
+    takeDamage(damage) {
+        this.curIntegrity -= damage;
+    }
     isDestroyed() {
         return this.curIntegrity <= 0;
     }
@@ -229,6 +225,9 @@ export class Hyperdrive extends ShipModule {
         this._chargeProgress = newChargeProgress;
     }
     
+    charge() {
+        this.chargeProgress += 1;
+    }
     resetChargeProgress() {
         this.chargeProgress = 0;
     }

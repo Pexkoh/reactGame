@@ -93,14 +93,18 @@ class SpaceShip {
             "curIntegrity": this.modules["hull"].curIntegrity,
         };
     }
-    fireWeaponSystem(target) {
-        // TODO: IMPLEMENTATION
+    chargeShield() {
+        this.modules.shield.chargeShield();
     }
-    takeHit(damage) {
-        // TODO: IMPLEMENTATION
+    fireWeaponSystem(target) {
+        target.takeDamage(this.modules.weaponSystem.damage);  // use target object to calculate damage
+    }
+    takeDamage(damage) {
+        const unblocked = this.modules.shield.blockDamage(damage);  // shield block phase
+        this.modules.hull.takeDamage(unblocked);  // overflow to hull
     }
     isDestroyed() {
-        if (this.modules["hull"].isDestroyed) {
+        if (this.modules.hull.isDestroyed()) {
             return true;
         } else {
             return false;
@@ -133,7 +137,27 @@ class SpaceShip {
             Hyperdrive.createHyperdrive_MKI(),
             new WeaponSystem(
                 "Weapon System Mark 0",
-                5,
+                25,
+            ),
+            
+            undefined,
+            undefined,
+        );
+    }
+    static createBaseEnemyShip2(shipName) {
+        return new SpaceShip(
+            shipName,
+            Hull.createHull_MKI(),
+            new Shield(
+                "Shield Mark I",
+                35,
+                10,
+            ),
+            FuelTank.createFuelTank_MKI(),
+            Hyperdrive.createHyperdrive_MKI(),
+            new WeaponSystem(
+                "Weapon System Mark II",
+                30,
             ),
             
             undefined,

@@ -52,7 +52,7 @@ function MainMenu( {setCurrentPage, gameState} ) {
                         "THE INTERCEPTOR",
                         1000
                     );
-                    setCurrentPage("testPage");
+                    setCurrentPage("introduction");
                     console.log(gameState.current);
                 }
                 else if (pageState.menuPosition == "endGame") {
