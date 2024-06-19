@@ -1,4 +1,8 @@
-import { Shield, Hull, WeaponSystem, FuelTank, Hyperdrive } from "./shipModules.js";
+import { Shield } from "./shield.js";
+import { Hull } from "./hull.js";
+import { WeaponSystem } from "./weaponSystem.js";
+import { FuelTank } from "./fuelTank.js";
+import { Hyperdrive } from "./hyperdrive.js";
 
 
 class SpaceShip {

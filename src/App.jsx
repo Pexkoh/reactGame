@@ -8,6 +8,7 @@ import Victory from './UI/events/victory';
 import SecondFight from './UI/fights/secondFight';
 import Ambush from './UI/events/ambush';
 
+
 function Game() {
     const [currentPage, setCurrentPage] = useState("mainMenu");
     const gameState = useRef(null);  // 
